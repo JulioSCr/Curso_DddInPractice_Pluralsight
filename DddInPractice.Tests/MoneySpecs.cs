@@ -3,10 +3,10 @@ using DddInPractice.Logic;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace dddinpractice.tests
+namespace DddInPractice.Tests
 {
     [TestClass]
-    public class MoneySpecs
+    public sealed class MoneySpecs
     {
         [TestMethod]
         public void Sum_of_two_moneys_produces_correct_result()
