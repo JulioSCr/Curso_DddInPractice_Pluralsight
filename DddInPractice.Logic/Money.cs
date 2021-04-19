@@ -4,12 +4,20 @@ namespace DddInPractice.Logic
 {
     public sealed class Money : ValueObject<Money>
     {
-        public int OneCentCount { get; set; }
-        public int TenCentCount { get; set; }
-        public int QuarterCount { get; set; }
-        public int OneDollarCount { get; set; }
-        public int FiveDollarCount { get; set; }
-        public int TwentyDollarCount { get; set; }
+        public int OneCentCount { get; }
+        public int TenCentCount { get; }
+        public int QuarterCount { get; }
+        public int OneDollarCount { get; }
+        public int FiveDollarCount { get; }
+        public int TwentyDollarCount { get; }
+
+        public decimal Amount => 
+            OneCentCount * 0.01m +
+            TenCentCount * 0.10m +
+            QuarterCount * 0.25m +
+            OneDollarCount +
+            FiveDollarCount * 5 +
+            TwentyDollarCount * 20;
 
         public Money(
             int oneCentCount,

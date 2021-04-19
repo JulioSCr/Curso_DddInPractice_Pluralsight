@@ -65,5 +65,38 @@ namespace dddinpractice.tests
 
             action.Should().Throw<InvalidOperationException>();
         }
+
+        [TestMethod]
+        [DataTestMethod]
+        [DataRow(0, 0, 0, 0, 0, 0, 0)]
+        [DataRow(1, 0, 0, 0, 0, 0, 0.01)]
+        [DataRow(1, 2, 0, 0, 0, 0, 0.21)]
+        [DataRow(1, 2, 3, 0, 0, 0, 0.96)]
+        [DataRow(1, 2, 3, 4, 0, 0, 4.96)]
+        [DataRow(1, 2, 3, 4, 5, 0, 29.96)]
+        [DataRow(1, 2, 3, 4, 5, 6, 149.96)]
+        [DataRow(11, 0, 0, 0, 0, 0, 0.11)]
+        [DataRow(110, 0, 0, 0, 100, 0, 501.1)]
+        public void Amount_is_calculated_corrected(
+            int oneCentCount,
+            int tenCentCount,
+            int quarterCount,
+            int oneDollarCount,
+            int fiveDollarCount,
+            int twentyDollarCount,
+            double expectedAmount
+        )
+        {
+            Money money = new Money(
+                oneCentCount,
+                tenCentCount,
+                quarterCount,
+                oneDollarCount,
+                fiveDollarCount,
+                twentyDollarCount
+            );
+
+            money.Amount.Should().Be((decimal)expectedAmount);
+        }
     }
 }
