@@ -1,6 +1,6 @@
 namespace DddInPractice.Logic
 {
-    public sealed class Money
+    public sealed class Money : ValueObject<Money>
     {
         public int OneCentCount { get; set; }
         public int TenCentCount { get; set; }
@@ -39,17 +39,41 @@ namespace DddInPractice.Logic
             return sum;
         }
 
-        public static Money operator =(Money money) 
+        protected override bool EqualsCore(Money other)
         {
-            Money equal = new Money(
-                money.OneCentCount,
-                money.TenCentCount,
-                money.QuarterCount,
-                money.OneDollarCount,
-                money.FiveDollarCount,
-                money.TwentyDollarCount
-            );
-            return equal;
+            return OneCentCount == other.OneCentCount
+                && TenCentCount == other.TenCentCount
+                && QuarterCount == other.QuarterCount
+                && OneDollarCount == other.OneDollarCount
+                && FiveDollarCount == other.FiveDollarCount
+                && TwentyDollarCount == other.TwentyDollarCount;
         }
+
+        protected override int GetHashCodeCore()
+        {
+            unchecked
+            {
+                int hashCode = OneCentCount;
+                hashCode = (hashCode * 397) ^ TenCentCount;
+                hashCode = (hashCode * 397) ^ QuarterCount;
+                hashCode = (hashCode * 397) ^ OneDollarCount;
+                hashCode = (hashCode * 397) ^ FiveDollarCount;
+                hashCode = (hashCode * 397) ^ TwentyDollarCount;
+                return hashCode;
+            }
+        }
+
+        // public static Money operator =(Money money) 
+        // {
+        //     Money equal = new Money(
+        //         money.OneCentCount,
+        //         money.TenCentCount,
+        //         money.QuarterCount,
+        //         money.OneDollarCount,
+        //         money.FiveDollarCount,
+        //         money.TwentyDollarCount
+        //     );
+        //     return equal;
+        // }
     }
 }
