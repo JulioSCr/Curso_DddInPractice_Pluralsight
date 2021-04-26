@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace DddInPractice.Logic
+namespace DddInPractice.Logic.Common
 {
     public abstract class AggregateRoot : Entity
     {

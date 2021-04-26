@@ -1,7 +1,8 @@
 using System;
 using System.Globalization;
+using DddInPractice.Logic.Common;
 
-namespace DddInPractice.Logic
+namespace DddInPractice.Logic.SharedKernel
 {
     public sealed class Money : ValueObject<Money>
     {

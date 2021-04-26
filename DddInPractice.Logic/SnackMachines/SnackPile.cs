@@ -1,7 +1,8 @@
 using System;
-using static DddInPractice.Logic.Snack;
+using DddInPractice.Logic.Common;
+using static DddInPractice.Logic.SnackMachines.Snack;
 
-namespace DddInPractice.Logic
+namespace DddInPractice.Logic.SnackMachines
 {
     public sealed class SnackPile : ValueObject<SnackPile>
     {

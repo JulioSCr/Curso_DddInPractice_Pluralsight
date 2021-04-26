@@ -1,10 +1,9 @@
-using DddInPractice.Logic;
-using static DddInPractice.Logic.Money;
-using static DddInPractice.Logic.Snack;
+using DddInPractice.Logic.SnackMachines;
+using static DddInPractice.Logic.SharedKernel.Money;
+using static DddInPractice.Logic.SnackMachines.Snack;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Linq;
 
 namespace DddInPractice.Tests
 {
