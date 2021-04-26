@@ -1,3 +1,5 @@
+using static DddInPractice.Logic.SnackPile;
+
 namespace DddInPractice.Logic
 {
     public class Slot : Entity
@@ -10,9 +12,9 @@ namespace DddInPractice.Logic
 
         public Slot(SnackMachine snackMachine, int position) : this()
         {
-            SnackPile = new SnackPile(null, 0, 0m);
             SnackMachine = snackMachine;
             Position = position;
+            SnackPile = Empty;
         }
     }
 }

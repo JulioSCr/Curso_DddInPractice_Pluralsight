@@ -50,18 +50,31 @@ namespace DddInPractice.Logic
             MoneyInTransaction = 0m;
         }
 
+        public string CanBuySnack(int position)
+        {
+            SnackPile snackPile = GetSnackPile(position);
+
+            if (snackPile.Quantity == 0)
+                return "The snack pile is empty";
+
+            if (MoneyInTransaction < snackPile.Price)
+                return "Not enough money";
+
+            if (!MoneyInside.CanAllocate(MoneyInTransaction - snackPile.Price))
+                return "Not enough to change";
+
+            return string.Empty;
+        }
+
         public void BuySnack(int position)
         {
-            Slot slot = GetSlot(position);
-            if (slot.SnackPile.Price > MoneyInTransaction)
+            if (CanBuySnack(position) != string.Empty)
                 throw new InvalidOperationException();
 
+            Slot slot = GetSlot(position);
             slot.SnackPile = slot.SnackPile.SubtractOne();
 
             Money change = MoneyInside.Allocate(MoneyInTransaction - slot.SnackPile.Price);
-            if (change.Amount < MoneyInTransaction - slot.SnackPile.Price)
-                throw new InvalidOperationException();
-
             MoneyInside -= change;
             MoneyInTransaction = 0m;
         }
