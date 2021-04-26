@@ -1,3 +1,5 @@
+using System;
+
 namespace DddInPractice.Logic
 {
     public sealed class SnackPile : ValueObject<SnackPile>
@@ -10,6 +12,12 @@ namespace DddInPractice.Logic
 
         public SnackPile(Snack snack, int quantity, decimal price) : this()
         {
+            if (quantity < 0)
+                throw new InvalidOperationException();
+            if (price < 0)
+                throw new  InvalidOperationException();
+            if (price % 0.01m > 0)
+                throw new  InvalidOperationException();
             Snack = snack;
             Quantity = quantity;
             Price = price;

@@ -23,9 +23,14 @@ namespace DddInPractice.Logic
             };
         }
 
+        private Slot GetSlot(int position)
+        {
+            return Slots.Single(x => x.Position == position);
+        }
+
         public SnackPile GetSnackPile(int position)
         {
-            return Slots.Single(x => x.Position == position).SnackPile;
+            return GetSlot(position).SnackPile;
         }
 
         public void InsertMoney(Money money)
@@ -44,7 +49,7 @@ namespace DddInPractice.Logic
 
         public void BuySnack(int position)
         {
-            Slot slot = Slots.Single(x => x.Position == position);
+            Slot slot = GetSlot(position);
             slot.SnackPile = slot.SnackPile.SubtractOne();
             MoneyInside += MoneyInTransaction;
             MoneyInTransaction = None;
