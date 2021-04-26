@@ -125,8 +125,36 @@ namespace DddInPractice.Tests
             {
                 Money money = money2 - money1;
             };
-            
+
             action.Should().Throw<InvalidOperationException>();
+        }
+
+        [TestMethod]
+        [DataTestMethod]
+        [DataRow(1, 0, 0, 0, 0, 0, "¢1")]
+        [DataRow(0, 0, 0, 1, 0, 0, "$1.00")]
+        [DataRow(1, 0, 0, 1, 0, 0, "$1.01")]
+        [DataRow(0, 0, 2, 1, 0, 0, "$1.50")]
+        public void To_string_should_return_amount_of_money(
+            int oneCentCount,
+            int tenCentCount,
+            int quarterCount,
+            int oneDollarCount,
+            int fiveDollarCount,
+            int twentyDollarCount,
+            string expectedString
+        )
+        {
+            Money money = new Money(
+                oneCentCount,
+                tenCentCount,
+                quarterCount,
+                oneDollarCount,
+                fiveDollarCount,
+                twentyDollarCount
+            );
+
+            money.ToString().Should().Be(expectedString);
         }
     }
 }

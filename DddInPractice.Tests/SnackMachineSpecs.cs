@@ -3,6 +3,7 @@ using static DddInPractice.Logic.Money;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Linq;
 
 namespace DddInPractice.Tests
 {
@@ -43,16 +44,17 @@ namespace DddInPractice.Tests
         }
 
         [TestMethod]
-        public void Money_in_transaction_goes_to_money_inside_after_purchase()
+        public void BuySnack_trades_insert_money_for_a_snack()
         {
             var snackMachine = new SnackMachine();
-            snackMachine.InsertMoney(Dollar);
+            snackMachine.LoadSnacks(1, new SnackPile(new Snack("Some Snack"), 10, 1m));
             snackMachine.InsertMoney(Dollar);
 
-            snackMachine.BuySnack();
+            snackMachine.BuySnack(1);
 
             snackMachine.MoneyInTransaction.Should().Be(None);
-            snackMachine.MoneyInside.Amount.Should().Be(2m);
+            snackMachine.MoneyInside.Amount.Should().Be(1m);
+            snackMachine.GetSnackPile(1).Quantity.Should().Be(9);
         }
     }
 }

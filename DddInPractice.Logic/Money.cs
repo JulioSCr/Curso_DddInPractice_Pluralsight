@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 
 namespace DddInPractice.Logic
 {
@@ -108,17 +109,11 @@ namespace DddInPractice.Logic
             }
         }
 
-        // public static Money operator =(Money money) 
-        // {
-        //     Money equal = new Money(
-        //         money.OneCentCount,
-        //         money.TenCentCount,
-        //         money.QuarterCount,
-        //         money.OneDollarCount,
-        //         money.FiveDollarCount,
-        //         money.TwentyDollarCount
-        //     );
-        //     return equal;
-        // }
+        public override string ToString()
+        {
+            if (Amount < 1)
+                return "¢" + (Amount * 100).ToString("0");
+            return Amount.ToString("C2", CultureInfo.CreateSpecificCulture("en-us"));
+        }
     }
 }
